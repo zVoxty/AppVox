@@ -92,6 +92,8 @@ public:
         QWidget::setTabOrder(listWidget, textEdit);
 
         retranslateUi(Chat);
+        QObject::connect(submitText, SIGNAL(clicked()), Chat, SLOT(Submit()));
+        QObject::connect(Chat, SIGNAL(newMessage(QString)), Chat, SLOT(AppendText(QString)));
 
         QMetaObject::connectSlotsByName(Chat);
     } // setupUi

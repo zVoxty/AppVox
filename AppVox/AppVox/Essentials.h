@@ -24,12 +24,10 @@ public:
 	Essentials();
 	~Essentials();
 
-	static void ClientThread(); // This function handle packets from server
+	bool ConnectToServer(std::string IP, int PORT); //Stabilish a socket connection to server
+	bool CloseConnection();	//Close a connection
 
-	bool ConnectToServer(std::string IP, int PORT);
-	bool CloseConnection();
-
-	bool ProcessPacket(PacketType _packettype);
+	virtual bool ProcessPacket(PacketType _packettype);
 
 	//Get Functions
 	bool GetInt32_t(int32_t & _int32_t);
@@ -47,13 +45,7 @@ public:
 	SOCKADDR_IN addr;
 	int sizeOfAddr = sizeof(addr);
 
-	std::string applicationName = "";
-	std::string serverCurrentVersion = "";
-
 	bool isConnected;
 };
-
-static Essentials * clientptr;  //This client ptr is necessary so that the ClientThread method can access the Client instance/methods. Since the ClientThread method is static, this is the simplest workaround I could think of since there will only be one instance of the client.
-
 
 #endif // !ESSENTIALS_H
