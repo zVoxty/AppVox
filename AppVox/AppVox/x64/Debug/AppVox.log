@@ -1,3 +1,11 @@
-﻿  Essentials.cpp
-  AppVox.vcxproj -> C:\Users\User\Documents\GitHub\Voxty-Dev\AppVox\x64\Debug\AppVox.exe
-  AppVox.vcxproj -> C:\Users\User\Documents\GitHub\Voxty-Dev\AppVox\x64\Debug\AppVox.pdb (Full PDB)
+﻿  Moc'ing Chat.h...
+  AppVox.cpp
+  Chat.cpp
+  moc_AppVox.cpp
+  moc_Chat.cpp
+  ProcessPacket.cpp
+  UISlots.cpp
+  main.cpp
+  Generating Code...
+  AppVox.vcxproj -> C:\Users\User\Desktop\AppVox\x64\Debug\AppVox.exe
+  AppVox.vcxproj -> C:\Users\User\Desktop\AppVox\x64\Debug\AppVox.pdb (Full PDB)

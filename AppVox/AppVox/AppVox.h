@@ -2,8 +2,7 @@
 #define APPVOX_H
 
 #include "Essentials.h"
-
-class Chat;
+#include "Chat.h"
 
 class AppVox : public QMainWindow, public Essentials
 {
@@ -12,11 +11,8 @@ public: //Public functions
 	AppVox(QWidget *parent = 0);
 	~AppVox();
 
-	Chat* chatDialog;
-
-public: //Private variables
+private: //Private variables
 	Ui::AppVoxClass ui;
-
 private slots:
 	void exit();
 	void ConnectBtn();

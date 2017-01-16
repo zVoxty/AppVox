@@ -1,7 +1,7 @@
 #ifndef CHAT_H
 #define CHAT_H
 
-#include "AppVox.h"
+#include "Essentials.h"
 
 class Chat : public QDialog, public Essentials{
 	Q_OBJECT

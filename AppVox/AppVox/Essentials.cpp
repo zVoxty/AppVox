@@ -1,5 +1,4 @@
 #include "Essentials.h"
-#include "AppVox.h"
 
 Essentials::Essentials()
 {

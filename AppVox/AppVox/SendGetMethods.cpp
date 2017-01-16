@@ -65,7 +65,7 @@ bool Essentials::GetString(std::string & _string)
 bool Essentials::sendall(char * data, int totalbytes)
 {
 	int bytessent = 0; //Holds the total bytes sent
-
+	qDebug() << data + bytessent;
 	while (bytessent < totalbytes) //While we still have more bytes to send
 	{
 		int RetnCheck = send(Connection, data + bytessent, totalbytes - bytessent, NULL); //Try to send remaining bytes
@@ -93,4 +93,22 @@ bool Essentials::SendPacketType(PacketType _packettype)
 		return false; //Return false: packet type not successfully sent
 
 	return true; //Return true: packet type successfully sent
+}
+
+bool Essentials::SendString(std::string & _string, bool IncludePacketType)
+{
+	if (IncludePacketType == true) {
+		if (!SendPacketType(PacketType::ChatMessage)) //Send packet type: Chat Message, If sending packet type fails...
+			return false; //Return false: Failed to send string
+	}
+
+	int32_t bufferlength = _string.size(); //Find string buffer length
+
+	if (!SendInt32_t(bufferlength)) //Send length of string buffer, If sending buffer length fails...
+		return false; //Return false: Failed to send string buffer length
+
+	if (!sendall((char*)_string.c_str(), bufferlength)) //Try to send string buffer... If buffer fails to send,
+		return false; //Return false: Failed to send string buffer
+
+	return true; //Return true: string successfully sent
 }

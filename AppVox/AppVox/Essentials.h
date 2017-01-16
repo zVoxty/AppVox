@@ -12,13 +12,13 @@
 #include <QTextTable>
 #include <QScrollBar>
 #include <QString>
+#include <QDebug>
 
 //Other
 #include "ui_Chat.h"
 #include "ui_AppVox.h"
 #include "PacketType.h"
 
-class AppVox;
 class Essentials {
 public:
 	Essentials();
@@ -41,12 +41,11 @@ public:
 	bool sendall(char * data, int totalbytes);
 	bool SendInt32_t(int32_t _int32_t);
 	bool SendPacketType(PacketType _packettype);
+	bool SendString(std::string & _string, bool IncludePacketType = true);
 
 	SOCKET Connection;
 	SOCKADDR_IN addr;
 	int sizeOfAddr = sizeof(addr);
-
-	AppVox * mainWindow;
 
 	std::string applicationName = "";
 	std::string serverCurrentVersion = "";

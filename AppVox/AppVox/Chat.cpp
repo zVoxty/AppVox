@@ -4,9 +4,16 @@ Chat::Chat() {
 	myChat.setupUi(this);
 
 	connect(myChat.submitText, SIGNAL(clicked()), this, SLOT(Submit()));
+
 	myChat.textEdit->setReadOnly(true);
+
 	QListWidgetItem *item = new QListWidgetItem(QIcon("user.png"), "Test");
 	myChat.listWidget->addItem(item);
+
+	if (!ConnectToServer("86.126.33.49", 1111)) {
+		MessageBoxA(NULL, "Error connection to server", "Error", MB_OK | MB_ICONERROR);
+		return;
+	}
 }
 
 Chat::~Chat() {
@@ -28,7 +35,7 @@ void Chat::AppendText(QString from, QString message)
 }
 
 void Chat::Submit() {
-	QString x = myChat.inputText->text();
-	AppendText("voxty", x);
+	QString message = myChat.inputText->text();
+	SendString(message.toStdString());
 	myChat.inputText->clear();
 }
