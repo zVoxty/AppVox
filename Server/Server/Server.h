@@ -11,7 +11,7 @@
 #include <ctime>
 #include <string>
 #include <sstream>
-#include <vector> //for std::vector
+#include <vector>
 
 class Connection
 {
@@ -20,6 +20,7 @@ public:
 	{
 		socket = socket_;
 		ActiveConnection = true; //Default to active connection 
+		connectionName = "Guest: ";
 	}
 
 	bool ActiveConnection; //True if connection is active, false if inactive(due to a disconnect)
