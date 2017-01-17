@@ -16,9 +16,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -28,64 +26,55 @@ class Ui_AppVoxClass
 {
 public:
     QWidget *centralWidget;
-    QLabel *connectionStatus;
+    QLabel *label;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
-    QPushButton *connectToServer;
-    QPushButton *disconnectToServer;
     QPushButton *chatButton;
     QPushButton *exit;
-    QMenuBar *menuBar;
-    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *AppVoxClass)
     {
         if (AppVoxClass->objectName().isEmpty())
             AppVoxClass->setObjectName(QStringLiteral("AppVoxClass"));
-        AppVoxClass->resize(600, 400);
+        AppVoxClass->resize(576, 402);
+        AppVoxClass->setStyleSheet(QStringLiteral("background-image: url(:/AppVox/imgg.jpg);"));
         centralWidget = new QWidget(AppVoxClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        connectionStatus = new QLabel(centralWidget);
-        connectionStatus->setObjectName(QStringLiteral("connectionStatus"));
-        connectionStatus->setGeometry(QRect(9, 9, 134, 16));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setEnabled(true);
+        label->setGeometry(QRect(190, 380, 191, 16));
+        label->setStyleSheet(QLatin1String("color:white;\n"
+"background:none;"));
         widget = new QWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(260, 120, 77, 112));
+        widget->setGeometry(QRect(220, 170, 119, 66));
         verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        connectToServer = new QPushButton(widget);
-        connectToServer->setObjectName(QStringLiteral("connectToServer"));
-
-        verticalLayout->addWidget(connectToServer);
-
-        disconnectToServer = new QPushButton(widget);
-        disconnectToServer->setObjectName(QStringLiteral("disconnectToServer"));
-
-        verticalLayout->addWidget(disconnectToServer);
-
         chatButton = new QPushButton(widget);
         chatButton->setObjectName(QStringLiteral("chatButton"));
+        chatButton->setMinimumSize(QSize(117, 0));
+        chatButton->setStyleSheet(QLatin1String("background:none;\n"
+"font: 12pt \"MV Boli\";"));
 
         verticalLayout->addWidget(chatButton);
 
         exit = new QPushButton(widget);
         exit->setObjectName(QStringLiteral("exit"));
+        exit->setMinimumSize(QSize(117, 0));
+        exit->setStyleSheet(QLatin1String("\n"
+"font: 12pt \"MV Boli\";"));
 
         verticalLayout->addWidget(exit);
 
         AppVoxClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(AppVoxClass);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 21));
-        AppVoxClass->setMenuBar(menuBar);
-        statusBar = new QStatusBar(AppVoxClass);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        AppVoxClass->setStatusBar(statusBar);
 
         retranslateUi(AppVoxClass);
+        QObject::connect(exit, SIGNAL(clicked()), AppVoxClass, SLOT(close()));
+        QObject::connect(chatButton, SIGNAL(clicked()), AppVoxClass, SLOT(EnableChat()));
 
         QMetaObject::connectSlotsByName(AppVoxClass);
     } // setupUi
@@ -93,9 +82,9 @@ public:
     void retranslateUi(QMainWindow *AppVoxClass)
     {
         AppVoxClass->setWindowTitle(QApplication::translate("AppVoxClass", "AppVox", Q_NULLPTR));
-        connectionStatus->setText(QApplication::translate("AppVoxClass", "Connection : No Connection", Q_NULLPTR));
-        connectToServer->setText(QApplication::translate("AppVoxClass", "Connect", Q_NULLPTR));
-        disconnectToServer->setText(QApplication::translate("AppVoxClass", "Disconnect", Q_NULLPTR));
+        label->setText(QApplication::translate("AppVoxClass", "zVoxty Corporation All Rights Reserved", Q_NULLPTR));
+        widget->setStyleSheet(QApplication::translate("AppVoxClass", "background:none;\n"
+"font: 12pt \"MV Boli\";", Q_NULLPTR));
         chatButton->setText(QApplication::translate("AppVoxClass", "Chat", Q_NULLPTR));
         exit->setText(QApplication::translate("AppVoxClass", "Exit", Q_NULLPTR));
     } // retranslateUi

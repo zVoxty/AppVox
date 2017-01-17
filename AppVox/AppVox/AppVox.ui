@@ -6,53 +6,63 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>576</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>AppVox</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/AppVox/imgg.jpg);</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="connectionStatus">
+   <widget class="QLabel" name="label">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>134</width>
+      <x>190</x>
+      <y>380</y>
+      <width>191</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color:white;
+background:none;</string>
+    </property>
     <property name="text">
-     <string>Connection : No Connection</string>
+     <string>zVoxty Corporation All Rights Reserved</string>
     </property>
    </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>120</y>
-      <width>77</width>
-      <height>112</height>
+      <x>220</x>
+      <y>170</y>
+      <width>119</width>
+      <height>66</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background:none;
+font: 12pt &quot;MV Boli&quot;;</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="connectToServer">
-       <property name="text">
-        <string>Connect</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="disconnectToServer">
-       <property name="text">
-        <string>Disconnect</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="chatButton">
+       <property name="minimumSize">
+        <size>
+         <width>117</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background:none;
+font: 12pt &quot;MV Boli&quot;;</string>
+       </property>
        <property name="text">
         <string>Chat</string>
        </property>
@@ -60,6 +70,16 @@
      </item>
      <item>
       <widget class="QPushButton" name="exit">
+       <property name="minimumSize">
+        <size>
+         <width>117</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+font: 12pt &quot;MV Boli&quot;;</string>
+       </property>
        <property name="text">
         <string>Exit</string>
        </property>
@@ -68,21 +88,46 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>600</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="AppVox.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>exit</sender>
+   <signal>clicked()</signal>
+   <receiver>AppVoxClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>253</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>296</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chatButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AppVoxClass</receiver>
+   <slot>EnableChat()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>286</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>351</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>EnableChat()</slot>
+ </slots>
 </ui>

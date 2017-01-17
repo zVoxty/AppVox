@@ -9,22 +9,22 @@ public:
 	Chat();
 	~Chat();
 
-public: // Private functions
-	
+private: // Private functions
+	static void ChatThread(); // This function handle packets from server
+	bool ProcessPacket(PacketType _packettype);
+
 private: // Private variables
 	Ui::Chat myChat;
-
-	static void ChatThread(); // This function handle packets from server
-
-	bool ProcessPacket(PacketType _packettype);
+	QString clientName;
 	
 signals:
-	void newMessage(const QString &from);
-
+	void newMessage(const QString &message);
+	void newUser(const QString &user);
 	
 private slots:
 	void Submit();
 	void AppendText(const QString &message);
+	void AppendUser(const QString &userName);
 	
 };
 

@@ -3,11 +3,6 @@
 Chat::Chat() {
 	myChat.setupUi(this);
 
-	myChat.textEdit->setReadOnly(true);
-
-	QListWidgetItem *item = new QListWidgetItem(QIcon("user.png"), "Test");
-	myChat.listWidget->addItem(item);
-
 	if (!ConnectToServer("86.126.33.49", 1111))
 		MessageBoxA(NULL, "Cannot connect", "Error", MB_OK);
 
@@ -21,6 +16,11 @@ Chat::~Chat() {
 	CloseConnection();
 }
 
+void Chat::AppendUser(const QString &userName) {
+	QListWidgetItem *user = new QListWidgetItem(QIcon("user.png"), userName);
+	myChat.listWidget->addItem(user);
+}
+
 void Chat::AppendText(const QString &message)
 {
 	QTextCursor cursor(myChat.textEdit->textCursor());
@@ -28,7 +28,7 @@ void Chat::AppendText(const QString &message)
 	QTextTableFormat tableformat;
 	tableformat.setBorder(0);
 	QTextTable *table = cursor.insertTable(1, 2, tableformat);
-	table->cellAt(0, 0).firstCursorPosition().insertText("Server: ");
+	table->cellAt(0, 0).firstCursorPosition().insertText("Someone: ");
 	table->cellAt(0, 1).firstCursorPosition().insertText(message);
 	QScrollBar *bar = myChat.textEdit->verticalScrollBar();
 	bar->setValue(bar->maximum());

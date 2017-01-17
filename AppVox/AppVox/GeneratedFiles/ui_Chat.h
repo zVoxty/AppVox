@@ -56,6 +56,7 @@ public:
         textEdit->setSizeIncrement(QSize(0, 0));
         textEdit->setBaseSize(QSize(0, 0));
         textEdit->viewport()->setProperty("cursor", QVariant(QCursor(Qt::ArrowCursor)));
+        textEdit->setReadOnly(true);
 
         horizontalLayout_2->addWidget(textEdit);
 

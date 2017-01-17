@@ -13,10 +13,8 @@ public: //Public functions
 
 private: //Private variables
 	Ui::AppVoxClass ui;
+
 private slots:
-	void exit();
-	void ConnectBtn();
-	void DisconnectBtn();
 	void EnableChat();
 };
 

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/AppVox">
         <file>user.png</file>
+        <file>imgg.jpg</file>
     </qresource>
 </RCC>
