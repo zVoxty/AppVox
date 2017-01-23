@@ -1,2 +1,2 @@
 # AppVox
-Vox application
+A chat application based on Winsock and Qt.
