@@ -15,6 +15,7 @@ public:
 private: // Private functions
 	static void ChatThread(); // This function handle packets from server
 	bool ProcessPacket(PacketType _packettype);
+
 private: // Private variables
 	Ui::Chat myChat;
 	QString clientName;
