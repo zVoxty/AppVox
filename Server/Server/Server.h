@@ -20,7 +20,7 @@ public:
 	{
 		socket = socket_;
 		ActiveConnection = true; //Default to active connection 
-		connectionName = "Guest: ";
+		connectionName = "Guest";
 	}
 
 	bool ActiveConnection; //True if connection is active, false if inactive(due to a disconnect)
@@ -59,6 +59,9 @@ private:
 	static void PacketSenderThread();
 
 	bool VerifyMessage(std::string message);
+	void SendNewUser(int ID, std::string connectionName);
+	void SendUserDisconnected(int ID);
+	void SendUsers(int ID);
 	void DisconnectClient(int ID); //Called to properly disconnect and clean up a client (if possible)
 
 private:

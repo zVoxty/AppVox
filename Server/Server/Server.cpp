@@ -73,7 +73,39 @@ bool Server::ListenForNewConnection()
 
 		std::cout << "Client Connected! ID:" << NewConnectionID << std::endl;
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(NewConnectionID), NULL, NULL); //Create Thread to handle this client. The index in the socket array for this thread is the value (i).
+		connections[NewConnectionID]->connectionName += " " + std::to_string(NewConnectionID);
+		SendNewUser(NewConnectionID, connections[NewConnectionID]->connectionName); // If a new client is connected send to other clients this client is connected
+		SendUsers(NewConnectionID); // Send to new client a list with other connected clients
 		return true;
+	}
+}
+
+void Server::SendUsers(int ID)
+{
+	std::string users;
+	for (auto it : connections) {
+		if (it == connections[ID])
+			continue;
+		users += it->connectionName + ",";
+	}
+	users = users.substr(0, users.size() - 1);
+	if (users != "")
+		SendCustomString_Packet(ID, users, PacketType::UsersConnected);
+}
+
+void Server::SendNewUser(int ID, std::string connectionName)
+{
+	for (int i = 0; i < connections.size(); ++i) {
+		if (i == ID) // If i == current id do not send
+			continue;
+		SendCustomString_Packet(i, connectionName, PacketType::newConnection);
+	}
+}
+
+void Server::SendUserDisconnected(int ID)
+{
+	for (int i = 0; i < connections.size(); ++i) {
+		SendCustomString_Packet(i, connections[ID]->connectionName, PacketType::clientDisconnected);
 	}
 }
 
@@ -161,6 +193,7 @@ void Server::DisconnectClient(int ID) //Disconnects a client and cleans up socke
 	{
 		return; //return - this should never happen, but just in case...
 	}
+	SendUserDisconnected(ID);
 	connections[ID]->pm.Clear(); //Clear out all remaining packets in queue for this connection
 	connections[ID]->ActiveConnection = false; //Update connection's activity status to false since connection is now unused
 	closesocket(connections[ID]->socket); //Close the socket for this connection

@@ -19,7 +19,7 @@ bool Server::ProcessPacket(int ID, PacketType _packettype)
 					SendString(i, "You: " + message); //send message to connection i
 				}
 				else {
-					SendString(i, connections[i]->connectionName + message); //send message to connection i
+					SendString(i, connections[ID]->connectionName+ ": " + message); //send message to connection i
 				}			
 			}
 

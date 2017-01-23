@@ -6,4 +6,7 @@ enum class PacketType
 	FileTransfer_EndOfFile, // Sent for when file transfer is complete
 	FileTransferByteBuffer, // Send Before sendint a byte buffer for file transfer
 	FileTransferRequestNextBuffer, // Send to request the next byte buffer for file
+	UsersConnected,
+	newConnection,
+	clientDisconnected
 };
