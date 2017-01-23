@@ -1,14 +1,2 @@
-﻿  Moc'ing AppVox.h...
-  Moc'ing Chat.h...
-  AppVox.cpp
-  Chat.cpp
-  Essentials.cpp
-  moc_AppVox.cpp
-  moc_Chat.cpp
-  ProcessPacket.cpp
-  SendGetMethods.cpp
-  UISlots.cpp
-  main.cpp
-  Generating Code...
-  qrc_AppVox.cpp
+﻿  Chat.cpp
   AppVox.vcxproj -> C:\Users\User\Desktop\AppVox\x64\Release\AppVox.exe

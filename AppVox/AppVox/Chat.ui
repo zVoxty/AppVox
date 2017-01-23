@@ -35,7 +35,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="mainChat">
        <property name="maximumSize">
         <size>
          <width>230</width>
@@ -63,7 +63,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget">
+      <widget class="QListWidget" name="connectionsList">
        <property name="maximumSize">
         <size>
          <width>120</width>
@@ -106,8 +106,8 @@
  <tabstops>
   <tabstop>submitText</tabstop>
   <tabstop>inputText</tabstop>
-  <tabstop>listWidget</tabstop>
-  <tabstop>textEdit</tabstop>
+  <tabstop>connectionsList</tabstop>
+  <tabstop>mainChat</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -143,10 +143,46 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>Chat</sender>
+   <signal>newUser(QString)</signal>
+   <receiver>Chat</receiver>
+   <slot>AppendUser(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>276</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Chat</sender>
+   <signal>userDisconnected(int)</signal>
+   <receiver>Chat</receiver>
+   <slot>DisconnectClient(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>371</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>371</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>newMessage(QString)</signal>
+  <signal>newUser(QString)</signal>
+  <signal>userDisconnected(int)</signal>
   <slot>Submit()</slot>
   <slot>AppendText(QString)</slot>
+  <slot>AppendUser(QString)</slot>
+  <slot>DisconnectClient(int)</slot>
  </slots>
 </ui>

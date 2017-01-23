@@ -30,8 +30,8 @@ class Ui_Chat
 public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
-    QTextEdit *textEdit;
-    QListWidget *listWidget;
+    QTextEdit *mainChat;
+    QListWidget *connectionsList;
     QHBoxLayout *horizontalLayout;
     QLineEdit *inputText;
     QPushButton *submitText;
@@ -50,21 +50,21 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        textEdit = new QTextEdit(Chat);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setMaximumSize(QSize(230, 248));
-        textEdit->setSizeIncrement(QSize(0, 0));
-        textEdit->setBaseSize(QSize(0, 0));
-        textEdit->viewport()->setProperty("cursor", QVariant(QCursor(Qt::ArrowCursor)));
-        textEdit->setReadOnly(true);
+        mainChat = new QTextEdit(Chat);
+        mainChat->setObjectName(QStringLiteral("mainChat"));
+        mainChat->setMaximumSize(QSize(230, 248));
+        mainChat->setSizeIncrement(QSize(0, 0));
+        mainChat->setBaseSize(QSize(0, 0));
+        mainChat->viewport()->setProperty("cursor", QVariant(QCursor(Qt::ArrowCursor)));
+        mainChat->setReadOnly(true);
 
-        horizontalLayout_2->addWidget(textEdit);
+        horizontalLayout_2->addWidget(mainChat);
 
-        listWidget = new QListWidget(Chat);
-        listWidget->setObjectName(QStringLiteral("listWidget"));
-        listWidget->setMaximumSize(QSize(120, 248));
+        connectionsList = new QListWidget(Chat);
+        connectionsList->setObjectName(QStringLiteral("connectionsList"));
+        connectionsList->setMaximumSize(QSize(120, 248));
 
-        horizontalLayout_2->addWidget(listWidget);
+        horizontalLayout_2->addWidget(connectionsList);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -89,12 +89,14 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         QWidget::setTabOrder(submitText, inputText);
-        QWidget::setTabOrder(inputText, listWidget);
-        QWidget::setTabOrder(listWidget, textEdit);
+        QWidget::setTabOrder(inputText, connectionsList);
+        QWidget::setTabOrder(connectionsList, mainChat);
 
         retranslateUi(Chat);
         QObject::connect(submitText, SIGNAL(clicked()), Chat, SLOT(Submit()));
         QObject::connect(Chat, SIGNAL(newMessage(QString)), Chat, SLOT(AppendText(QString)));
+        QObject::connect(Chat, SIGNAL(newUser(QString)), Chat, SLOT(AppendUser(QString)));
+        QObject::connect(Chat, SIGNAL(userDisconnected(int)), Chat, SLOT(DisconnectClient(int)));
 
         QMetaObject::connectSlotsByName(Chat);
     } // setupUi

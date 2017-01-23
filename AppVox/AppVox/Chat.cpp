@@ -2,14 +2,7 @@
 
 Chat::Chat() {
 	myChat.setupUi(this);
-
-	if (!ConnectToServer("86.126.33.49", 1111))
-		MessageBoxA(NULL, "Cannot connect", "Error", MB_OK);
-
 	chatPointer = this;
-
-	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ChatThread, NULL, NULL, NULL); //Create the client thread that will receive any data that the server sends.
-
 }
 
 Chat::~Chat() {
@@ -18,22 +11,27 @@ Chat::~Chat() {
 
 void Chat::AppendUser(const QString &userName) {
 	QListWidgetItem *user = new QListWidgetItem(QIcon("user.png"), userName);
-	myChat.listWidget->addItem(user);
+	myChat.connectionsList->addItem(user);
 }
 
 void Chat::AppendText(const QString &message)
 {
-	QTextCursor cursor(myChat.textEdit->textCursor());
+	QTextCursor cursor(myChat.mainChat->textCursor());
 	cursor.movePosition(QTextCursor::End);
 	QTextTableFormat tableformat;
 	tableformat.setBorder(0);
 	QTextTable *table = cursor.insertTable(1, 2, tableformat);
-	table->cellAt(0, 0).firstCursorPosition().insertText("Someone: ");
 	table->cellAt(0, 1).firstCursorPosition().insertText(message);
-	QScrollBar *bar = myChat.textEdit->verticalScrollBar();
+	QScrollBar *bar = myChat.mainChat->verticalScrollBar();
 	bar->setValue(bar->maximum());
 	myChat.inputText->clear();
 	myChat.inputText->setFocus();
+}
+
+void Chat::DisconnectClient(const int & clientIndex) {
+	QListWidgetItem *deleted;
+	deleted = myChat.connectionsList->takeItem(clientIndex);
+	emit newMessage("Client " + deleted->text() + " disconnected");
 }
 
 bool Chat::ProcessPacket(PacketType _packettype)
@@ -41,21 +39,62 @@ bool Chat::ProcessPacket(PacketType _packettype)
 	try {
 		switch (_packettype)
 		{
-		case PacketType::ChatMessage:{
-			std::string message;
-			if (!GetString(message))
-				throw QString("Cannot get message");
-			QString qMessage = QString::fromStdString(message);
-			emit newMessage(qMessage);
-			break;
-		}
-		default:
-			break;
+			case PacketType::ChatMessage:{
+				std::string message;
+				if (!GetString(message))
+					throw QString("Cannot get message");
+				emit newMessage(QString::fromStdString(message));
+				break;
+			}
+			case PacketType::newConnection: {
+				std::string connectionName;
+				if(!GetString(connectionName))
+					throw QString("Cannot get new connection");
+				emit newUser(QString::fromStdString(connectionName));
+				emit newMessage(QString::fromStdString(connectionName) + " connected to chat.");
+				break;
+			}
+			case PacketType::UsersConnected: {
+				std::string connectionName;
+				if (!GetString(connectionName))
+					throw QString("Cannot get new connection");
+				QRegExp rx("(\\,)");
+				QStringList query = QString::fromStdString(connectionName).split(rx);
+				for (auto it : query) {
+					emit newUser(it);
+				}			
+				break;
+			}
+			case PacketType::clientDisconnected: {
+				std::string connectionName;
+				if(!GetString(connectionName))
+					throw QString("Cannot get new connection");
+				for (int row = 0; row < myChat.connectionsList->count(); row++){
+					QListWidgetItem *item = myChat.connectionsList->item(row);
+					if (item->text() == QString::fromStdString(connectionName)) {
+						emit userDisconnected(row);
+						break;
+					}
+				}
+				
+				//emit newMessage(QString::fromStdString(connectionName) + " disconnected from chat.");
+			}
+			default:
+				break;
 		}
 	}
 	catch (QString message) {
 		qDebug() << message;
 	}
+	return true;
+}
+
+bool Chat::startConnection(){
+	if (!Essentials::ConnectToServer("86.126.33.49", 1111))
+		return false;
+
+	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ChatThread, NULL, NULL, NULL); //Create the client thread that will receive any data that the server sends.
+
 	return true;
 }
 

@@ -2,5 +2,8 @@
 
 void AppVox::EnableChat() {
 	Chat chatDialog;
-	chatDialog.exec();
+	if(chatDialog.startConnection())
+		chatDialog.exec();
+	else
+		MessageBoxA(NULL, "Cannot connect", "Error", MB_OK);
 }

@@ -1,4 +1,5 @@
-﻿  AppVox.cpp
+﻿  Moc'ing Chat.h...
+  AppVox.cpp
   Chat.cpp
   Essentials.cpp
   moc_AppVox.cpp
