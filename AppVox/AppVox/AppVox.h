@@ -11,7 +11,7 @@ public: //Public functions
 	AppVox(QWidget *parent = 0);
 	~AppVox();
 
-private: //Private variables
+private: //Private variable
 	Ui::AppVoxClass ui;
 
 private slots:
