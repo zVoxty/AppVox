@@ -16,16 +16,16 @@ bool Server::ProcessPacket(int ID, PacketType _packettype)
 				if (connections[i]->ActiveConnection == false) //if connection is not active
 					continue; //Skip logic for this connection
 				if (i == ID) { //If connection is the user who sent the message...
-					SendString(i, "You: " + message); //send message to connection i
+					SendString(i, connections[ID]->connectionName + ": " + message); //send message to connection i
 				}
 				else {
 					SendString(i, connections[ID]->connectionName+ ": " + message); //send message to connection i
 				}			
 			}
-
 			std::cout << "Processed chat message packet from user " << connections[ID]->connectionName << " message is " << message << std::endl;
 			break;
 		}
+
 		case PacketType::FileTransferRequestFile:
 		{
 			std::string FileName; //string to store file name
@@ -51,6 +51,7 @@ bool Server::ProcessPacket(int ID, PacketType _packettype)
 
 			break;
 		}
+
 		case PacketType::FileTransferRequestNextBuffer:
 		{
 			if (!HandleSendFile(ID)) //Attempt to send byte buffer from file. If failure...

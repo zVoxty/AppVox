@@ -71,9 +71,13 @@ bool Server::ListenForNewConnection()
 			connections.push_back(newConnection); //push new connection into vector of connections
 		}
 
-		std::cout << "Client Connected! ID:" << NewConnectionID << std::endl;
+		
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(NewConnectionID), NULL, NULL); //Create Thread to handle this client. The index in the socket array for this thread is the value (i).
-		connections[NewConnectionID]->connectionName += " " + std::to_string(NewConnectionID);
+
+		if (!GetString(NewConnectionID, connections[NewConnectionID]->connectionName))
+			std::cout << "Fail get username from " << NewConnectionID << std::endl;
+
+		std::cout << "Client : " << connections[NewConnectionID]->connectionName << " connected to chat." << std::endl;
 		SendNewUser(NewConnectionID, connections[NewConnectionID]->connectionName); // If a new client is connected send to other clients this client is connected
 		SendUsers(NewConnectionID); // Send to new client a list with other connected clients
 		return true;
@@ -161,7 +165,7 @@ void Server::ClientHandlerThread(int ID) //ID = the index in the SOCKET connecti
 		if (!serverptr->ProcessPacket(ID, packettype)) //Process packet (packet type)
 			break; //If there is an issue processing the packet, exit this loop
 	}
-	std::cout << "Lost connection to client ID: " << ID << std::endl;
+	std::cout << "Lost connection to client: " << serverptr->connections[ID]->connectionName << std::endl;
 	serverptr->DisconnectClient(ID); //Disconnect this client and clean up the connection if possible
 	return;
 }

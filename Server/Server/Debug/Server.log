@@ -1,3 +1,13 @@
-﻿  ProcessPacket.cpp
-  Server.vcxproj -> C:\Users\User\Documents\Visual Studio 2015\Projects\Server\Debug\Server.exe
-  Server.vcxproj -> C:\Users\User\Documents\Visual Studio 2015\Projects\Server\Debug\Server.pdb (Full PDB)
+﻿  Source.cpp
+  Server.cpp
+c:\users\user\documents\github\appvox\server\server\server.cpp(102): warning C4018: '<': signed/unsigned mismatch
+c:\users\user\documents\github\appvox\server\server\server.cpp(111): warning C4018: '<': signed/unsigned mismatch
+c:\users\user\documents\github\appvox\server\server\server.cpp(143): warning C4244: '=': conversion from 'std::streamoff' to 'int', possible loss of data
+  SendGetMethods.cpp
+  ProcessPacket.cpp
+  PacketStructs.cpp
+  PacketManager.cpp
+  Packet.cpp
+  Generating Code...
+  Server.vcxproj -> C:\Users\User\Documents\GitHub\AppVox\Server\Debug\Server.exe
+  Server.vcxproj -> C:\Users\User\Documents\GitHub\AppVox\Server\Debug\Server.pdb (Full PDB)

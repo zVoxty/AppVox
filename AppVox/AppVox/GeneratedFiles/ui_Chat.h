@@ -46,6 +46,10 @@ public:
         Chat->resize(385, 300);
         Chat->setMinimumSize(QSize(385, 300));
         Chat->setMaximumSize(QSize(385, 300));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/AppVox/appicon.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon.addFile(QStringLiteral(":/AppVox/appicon.png"), QSize(), QIcon::Disabled, QIcon::On);
+        Chat->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(Chat);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();

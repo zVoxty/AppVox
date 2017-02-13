@@ -13,8 +13,14 @@
   <property name="windowTitle">
    <string>AppVox</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/AppVox/appicon.png</normalon>
+    <disabledon>:/AppVox/appicon.png</disabledon>
+   </iconset>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/AppVox/imgg.jpg);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="label">
@@ -37,7 +43,7 @@ background:none;</string>
      <string>zVoxty Corporation All Rights Reserved</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>220</x>

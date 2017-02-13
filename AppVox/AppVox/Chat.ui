@@ -31,6 +31,12 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/AppVox/appicon.png</normalon>
+    <disabledon>:/AppVox/appicon.png</disabledon>
+   </iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -109,7 +115,9 @@
   <tabstop>connectionsList</tabstop>
   <tabstop>mainChat</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="AppVox.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>submitText</sender>

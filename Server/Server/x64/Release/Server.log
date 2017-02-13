@@ -1,0 +1,25 @@
+﻿  Packet.cpp
+  PacketManager.cpp
+  PacketStructs.cpp
+PacketStructs.cpp(14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+PacketStructs.cpp(14): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+PacketStructs.cpp(17): warning C4267: 'argument': conversion from 'size_t' to 'u_long', possible loss of data
+  ProcessPacket.cpp
+ProcessPacket.cpp(19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+ProcessPacket.cpp(22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  SendGetMethods.cpp
+SendGetMethods.cpp(80): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+SendGetMethods.cpp(80): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+SendGetMethods.cpp(83): warning C4267: 'argument': conversion from 'size_t' to 'u_long', possible loss of data
+  Server.cpp
+Server.cpp(53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+Server.cpp(62): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+Server.cpp(75): warning C4312: 'type cast': conversion from 'int' to 'LPVOID' of greater size
+Server.cpp(143): warning C4244: '=': conversion from 'std::streamoff' to 'int', possible loss of data
+Server.cpp(182): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Source.cpp
+  Generating code
+  Finished generating code
+  All 534 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Server.vcxproj -> C:\Users\User\Documents\GitHub\AppVox\Server\x64\Release\Server.exe
+  Server.vcxproj -> C:\Users\User\Documents\GitHub\AppVox\Server\x64\Release\Server.pdb (Full PDB)

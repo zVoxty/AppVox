@@ -2,8 +2,13 @@
 
 void AppVox::EnableChat() {
 	Chat chatDialog;
-	if(chatDialog.startConnection())
-		chatDialog.exec();
-	else
-		MessageBoxA(NULL, "Cannot connect", "Error", MB_OK);
+	try {
+		if (chatDialog.startConnection())
+			chatDialog.exec();
+		else
+			throw("Cannot connect");
+	}
+	catch (const char * message) {
+		QMessageBox::information(this, "Info", message);
+	}
 }

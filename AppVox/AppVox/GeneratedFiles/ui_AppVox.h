@@ -27,7 +27,7 @@ class Ui_AppVoxClass
 public:
     QWidget *centralWidget;
     QLabel *label;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QPushButton *chatButton;
     QPushButton *exit;
@@ -37,7 +37,11 @@ public:
         if (AppVoxClass->objectName().isEmpty())
             AppVoxClass->setObjectName(QStringLiteral("AppVoxClass"));
         AppVoxClass->resize(576, 402);
-        AppVoxClass->setStyleSheet(QStringLiteral("background-image: url(:/AppVox/imgg.jpg);"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/AppVox/appicon.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon.addFile(QStringLiteral(":/AppVox/appicon.png"), QSize(), QIcon::Disabled, QIcon::On);
+        AppVoxClass->setWindowIcon(icon);
+        AppVoxClass->setStyleSheet(QStringLiteral(""));
         centralWidget = new QWidget(AppVoxClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         label = new QLabel(centralWidget);
@@ -46,15 +50,15 @@ public:
         label->setGeometry(QRect(190, 380, 191, 16));
         label->setStyleSheet(QLatin1String("color:white;\n"
 "background:none;"));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(220, 170, 119, 66));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(220, 170, 119, 66));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        chatButton = new QPushButton(widget);
+        chatButton = new QPushButton(layoutWidget);
         chatButton->setObjectName(QStringLiteral("chatButton"));
         chatButton->setMinimumSize(QSize(117, 0));
         chatButton->setStyleSheet(QLatin1String("background:none;\n"
@@ -62,7 +66,7 @@ public:
 
         verticalLayout->addWidget(chatButton);
 
-        exit = new QPushButton(widget);
+        exit = new QPushButton(layoutWidget);
         exit->setObjectName(QStringLiteral("exit"));
         exit->setMinimumSize(QSize(117, 0));
         exit->setStyleSheet(QLatin1String("\n"
@@ -83,7 +87,7 @@ public:
     {
         AppVoxClass->setWindowTitle(QApplication::translate("AppVoxClass", "AppVox", Q_NULLPTR));
         label->setText(QApplication::translate("AppVoxClass", "zVoxty Corporation All Rights Reserved", Q_NULLPTR));
-        widget->setStyleSheet(QApplication::translate("AppVoxClass", "background:none;\n"
+        layoutWidget->setStyleSheet(QApplication::translate("AppVoxClass", "background:none;\n"
 "font: 12pt \"MV Boli\";", Q_NULLPTR));
         chatButton->setText(QApplication::translate("AppVoxClass", "Chat", Q_NULLPTR));
         exit->setText(QApplication::translate("AppVoxClass", "Exit", Q_NULLPTR));

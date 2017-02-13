@@ -16,8 +16,7 @@
 class Connection
 {
 public:
-	Connection(SOCKET socket_)
-	{
+	Connection(SOCKET socket_){
 		socket = socket_;
 		ActiveConnection = true; //Default to active connection 
 		connectionName = "Guest";
@@ -38,7 +37,6 @@ class Server
 public:
 	Server(int PORT, bool BroadcastPublically = false);
 	bool ListenForNewConnection();
-	
 
 private:
 

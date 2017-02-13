@@ -1,6 +1,7 @@
 <RCC>
-    <qresource prefix="/AppVox">
-        <file>user.png</file>
-        <file>imgg.jpg</file>
-    </qresource>
+  <qresource prefix="/AppVox">
+    <file>appicon.png</file>
+    <file>user.png</file>
+    <file>imgg.jpg</file>
+  </qresource>
 </RCC>

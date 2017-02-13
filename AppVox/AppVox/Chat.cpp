@@ -3,6 +3,7 @@
 Chat::Chat() {
 	myChat.setupUi(this);
 	chatPointer = this; // pointer which will trigger late the chat thread
+	this->setWindowTitle("Chat");
 }
 
 Chat::~Chat() {
@@ -90,13 +91,27 @@ bool Chat::ProcessPacket(PacketType _packettype)
 	return true;
 }
 
+bool Chat::setupUsername()
+{
+	setUsername *dialog = new setUsername;
+	dialog->exec();
+	clientName = dialog->usernamex;
+	if (!clientName.isEmpty())
+		return true;
+	return false;
+}
+
 bool Chat::startConnection(){
-	if (!Essentials::ConnectToServer("86.126.33.49", 1111)) // call from inherited class "Essentials" the connect server function whick open the socket 
-		return false;
-
-	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ChatThread, NULL, NULL, NULL); //Create the client thread that will receive any data that the server sends.
-
-	return true;
+	if (setupUsername()) {
+		if (!Essentials::ConnectToServer("86.123.42.182", 1111)) //Call from inherited class "Essentials" the connect server function whick open the socket 
+			return false;
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ChatThread, NULL, NULL, NULL); //Create the client thread that will receive any data that the server sends.
+		SendString(clientName.toStdString(), false);
+		return true;
+	}
+	else {
+		throw("Please set username.");
+	}
 }
 
 void Chat::ChatThread()
